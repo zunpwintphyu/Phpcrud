@@ -1,3 +1,10 @@
+<?php 
+include "conf/config.php";
+//$result=mysqli_query($conn,"UPDATE `crud` SET `id`=[value-1],`name`=[value-2],`rollno`=[value-3],`address`=[value-4],`email`=[value-5],`phoneno`=[value-6] WHERE 1");
+$result = mysqli_query($conn,"SELECT * FROM crud ORDER BY id ASC");
+//$res=mysqli_fetch_array($result);
+//var_dump($res);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,34 +47,37 @@
    <?php include("common/header.html");?>
     <a href="create.php" ><input type="button" value="Add New Student"></a>
     <br><br>
+    
     <table class="table" border="1px solid">
-       <thead>
+    
            <tr>
+               <th>Id</th>
                <th>Name</th>
                <th>Roll_No</th>
                <th>Address</th>
                <th>Email</th>
                <th>Phone_NO</th>
+               <th>Action</th>
            </tr>
-       </thead>
-       <tbody>
-           <tr>
-               <td >Mg Mg</td>
-               <td>3</td>
-               <td>Yangon</td>
-               <td>mgmg@gmail.com</td>
-               <td>0978546321</td>
-           </tr>
-           <tr>
-               <td>Ma Ma</td>
-               <td>4</td>
-               <td>Mandalay</td>
-               <td>mama@gmail.com</td>
-               <td>09788865432</td>
-           </tr>
-       </tbody>
-       </table>
+           
+           <?php
+           while($res = mysqli_fetch_array($result)){
+               echo "<tr>";
+               echo "<td>".$res['id']."</td>";
+               echo "<td>".$res['name']."</td>";
+               echo "<td>".$res['rollno']."</td>";
+               echo "<td>".$res['address']."</td>";
+               echo "<td>".$res['email']."</td>";
+               echo "<td>".$res['phoneno']."</td>";
+               echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a>|<a href=\"query/delete.php?id=$res[id]\" onclick=\"return confirm('Are you sure want to delete?')\">DELETE</a></td>";
+               echo "</tr>";
+           }
+           ?>
+           
        
+    </table>
+   
+
        <?php include("common/footer.html");?>
        <!--<div class="footer">
        <b>footer</b>

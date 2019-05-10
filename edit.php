@@ -1,3 +1,34 @@
+<?php 
+include "conf/config.php";
+$id= $_GET['id'];
+$result = mysqli_query($conn,"SELECT * FROM crud ORDER BY id=$id");
+
+while($res = mysqli_fetch_array($result)){
+$name = $res['name']; 
+$rollno =$res['rollno'];
+$address =$res['address'];
+$email=$res['email'];
+$phoneno=$res['phoneno']; 
+
+}
+
+// echo $name;
+// echo "<br>";
+
+// echo $rollno;
+// echo "<br>";
+
+// echo $address;
+// echo "<br>";
+
+// echo $email;
+// echo "<br>";
+
+// echo $phoneno;
+// echo "<br>";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,27 +80,25 @@
 
     <br><br>
     <div style="margin-left:600px;">
-        <form action="query/store.php" method="POST">
+        <form action="update.php" method="POST">
             <label class="a">Name:</label><br>
-            <input type="text" name="name" ><br>
+            <input type="text" name="name" value="<?php echo $name ?>"><br>
 
             <label class="a">Roll_No:</label><br>
-            <input type="text" name="roll_no" ><br>
+            <input type="text" name="roll_no" value="<?php echo $rollno ?>"><br>
 
             <label class="a">Address:</label><br>
-            <textarea rows="4" cols="50" name="address"></textarea><br>
+            <textarea  name="address" ><?php echo $address ?></textarea><br>
 
             <label class="a">Email:</label><br>
-            <input type="text" name="email" ><br>
+            <input type="text" name="email" value="<?php echo $email ?>"> <br>
         
             <label class="a">Phone_No:</label><br>
-            <input type="text" name="phone_no">
+            <input type="text" name="phone_no"value="<?php echo $phoneno ?>">
             <br><br>
 
-            <button>
-            <a href="index.php">Back</a>
-            </button>
-            <input type="submit" value="Save">
+            <input type="hidden" name="id" value="<?php echo $id?>">
+            <input type="submit" name="update"  value="Submit">
             
         </form>
         
